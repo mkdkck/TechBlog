@@ -82,12 +82,15 @@ router.get('/blogs/:id', async (req, res) => {
                 },
             ],
         });
+
+
         const comments = commentData.map(comment => comment.get({ plain: true }));
 
         res.render('comments', {
             ...blog,
             comments,
-            logged_in: req.session.logged_in
+            logged_in: req.session.logged_in,
+            commentsUser_id: req.session.user_id
         });
 
 
