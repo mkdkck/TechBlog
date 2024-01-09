@@ -1,7 +1,6 @@
-<div class="position-relative">
-    <div class="">
-        <a class="text-uppercase text-justify">{{comment}}</a>
-        {{user.name}}
-        {{format_date date_created}}
+<div class="container">
+    <div class="m-2">
+        <span>{{comment}}</span>
+        <span class="blockquote-footer">by {{user.name}} on {{format_date date_created}}</span>
     </div>
 </div>

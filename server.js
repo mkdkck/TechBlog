@@ -28,7 +28,6 @@ const sess = {
     sameSite: "strict",
   },
 };
-
 app.use(session(sess));
 
 app.engine("handlebars", hbs.engine);
