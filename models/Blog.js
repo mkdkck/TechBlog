@@ -18,11 +18,6 @@ Blog.init(
         description: {
             type: DataTypes.STRING,
         },
-        date_created: {
-            type: DataTypes.DATE,
-            allowNull: false,
-            defaultValue: DataTypes.NOW,
-        },
         user_id: {
             type: DataTypes.INTEGER,
             references: {
@@ -30,6 +25,12 @@ Blog.init(
                 key: 'id',
             },
         },
+        date_created: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: DataTypes.NOW,
+        },
+
     },
     {
         sequelize,

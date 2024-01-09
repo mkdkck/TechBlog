@@ -13,12 +13,12 @@ const loginFormHandler = async (event) => {
             headers: { 'Content-Type': 'application/json' },
         });
 
+        const responseBody = await response.json();
         if (response.ok) {
             document.location.replace('/');
-        } else {
-            const responseBody = await response.json();
-            alert(responseBody.message);
         }
+        alert(responseBody.message);
+
     }
 };
 
