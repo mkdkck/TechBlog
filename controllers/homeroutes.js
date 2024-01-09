@@ -64,6 +64,13 @@ router.get('/newblog', withAuth, (req, res) => {
     });
 });
 
+router.get('/blogs/:id', withAuth, (req, res) => {
+    res.render('comments', {
+        user_id: req.session.user_id,
+        logged_in: true
+    });
+});
+
 router.get('/logout', (req, res) => {
     if (req.session.logged_in) {
         req.session.destroy(() => {
