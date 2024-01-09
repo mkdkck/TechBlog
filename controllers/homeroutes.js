@@ -64,7 +64,7 @@ router.get('/newblog', withAuth, (req, res) => {
     });
 });
 
-router.get('/blogs/:id', async (req, res) => {
+router.get('/blogs/:id', withAuth, async (req, res) => {
     try {
         const blogData = await Blog.findByPk(req.params.id, {
             include: [
@@ -102,9 +102,10 @@ router.get('/blogs/:id', async (req, res) => {
 
 router.get('/logout', (req, res) => {
     if (req.session.logged_in) {
-        req.session.destroy();
-        res.redirect('/');
-        res.status(204).end();
+        req.session.destroy(() => {
+            res.redirect('/');
+            res.status(204).end();
+        });
     } else {
         res.status(404).end();
     }

@@ -34,7 +34,6 @@ router.get('/:id', withAuth, async (req, res) => {
 
 router.put('/:id', withAuth, async (req, res) => {
     try {
-        console.log(req.body)
         const blogData = await Blog.update(req.body, {
             where: {
                 id: req.params.id
