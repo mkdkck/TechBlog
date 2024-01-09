@@ -13,10 +13,8 @@ router.get('/', async (req, res) => {
             ],
         });
 
-        // Serialize data so the template can read it
         const blogs = blogData.map((blog) => blog.get({ plain: true }));
 
-        // Pass serialized data and session flag into template
         res.render('homepage', {
             blogs,
             logged_in: req.session.logged_in
@@ -27,7 +25,6 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-    // If the user is already logged in, redirect the request to another route
     if (req.session.logged_in) {
         res.redirect('/');
         return;
@@ -64,7 +61,7 @@ router.get('/newblog', withAuth, (req, res) => {
     });
 });
 
-router.get('/blogs/:id', withAuth, async (req, res) => {
+router.get('/blogs/:id', async (req, res) => {
     try {
         const blogData = await Blog.findByPk(req.params.id, {
             include: [
@@ -90,7 +87,7 @@ router.get('/blogs/:id', withAuth, async (req, res) => {
         res.render('comments', {
             ...blog,
             comments,
-            logged_in: true
+            logged_in: req.session.logged_in
         });
 
 

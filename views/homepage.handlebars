@@ -1,17 +1,12 @@
-<!-- Loop over each object in the projects array -->
 {{#each blogs as |blog| }}
-<div class="row mb-4">
-    <div class="col-md-5">
-        <h2>
-            <!-- Call helper function with triple brackets to render the emoji span as HTML -->
-            <a href="/blogs/{{id}}">{{title}}</a>
-        </h2>
-        <p>Created by {{user.name}} on {{format_date date_created}}</p>
-    </div>
-    <div class="col-md-7">
-        <p>
-            {{description}}
-        </p>
+<div class="card m-3 col-5 col-sm-10">
+    <a href="/blogs/{{id}}" class="card-header fs-3 fw-bold">{{title}}</a>
+    <div class="card-body">
+        <blockquote class="blockquote mb-0">
+            <p>{{description}}.</p>
+            <p class="blockquote-footer mt-3">Created by {{user.name}} on {{format_date date_created}}.
+            </p>
+        </blockquote>
     </div>
 </div>
 {{/each}}
