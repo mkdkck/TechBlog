@@ -1,0 +1,21 @@
+<section class="user-info">
+    <h2>Welcome, {{user.name}}!</h2>
+</section>
+
+<section class="">
+    <form id="editBlog" class="mt-3" userid="{{user_id}}" blogid="{{id}}">
+        <h3>Edit your blog</h3>
+        <div class="mb-3">
+            <label for="editBlogTitle" class="form-label">Title</label>
+            <input class="form-control" id="editBlogTitle" placeholder="{{title}}">
+        </div>
+        <div class="mb-3">
+            <label for="editBlogBody" class="form-label">Content</label>
+            <textarea class="form-control" id="editBlogBody" rows="3" placeholder="{{description}}"></textarea>
+        </div>
+        <button type="button" class="btn btn-primary" id="blogUpdate">Update</button>
+        <button type="button" class="btn btn-primary" id="blogDelete">Delete</button>
+    </form>
+</section>
+
+<script src="/js/editDel.js"></script>
