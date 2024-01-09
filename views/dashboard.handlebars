@@ -5,12 +5,12 @@
     <h3>Your Blogs</h3>
     <div class="row"></div>
     <header class="">
+        {{#if blogs.length}}
         <div class="grid">
-            {{#if blogs.length}}
             {{#each blogs}}
             {{> blog}}
+            {{/each}}
         </div>
-        {{/each}}
         {{else}}
         <p>You have not posted any blogs yet.</p>
         {{/if}}

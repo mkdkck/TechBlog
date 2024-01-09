@@ -15,7 +15,7 @@ const loginFormHandler = async (event) => {
 
         const responseBody = await response.json();
         if (response.ok) {
-            document.location.replace('/');
+            document.location.replace('/dashboard');
         }
         alert(responseBody.message);
 

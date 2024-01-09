@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Blog, User } = require('../models');
+const { Blog, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
@@ -64,19 +64,47 @@ router.get('/newblog', withAuth, (req, res) => {
     });
 });
 
-router.get('/blogs/:id', withAuth, (req, res) => {
-    res.render('comments', {
-        user_id: req.session.user_id,
-        logged_in: true
-    });
+router.get('/blogs/:id', async (req, res) => {
+    try {
+        const blogData = await Blog.findByPk(req.params.id, {
+            include: [
+                {
+                    model: User,
+                    attributes: ['name'],
+                },
+            ],
+        });
+        const blog = blogData.get({ plain: true });
+
+        const commentData = await Comment.findAll({
+            where: { blog_id: req.params.id },
+            include: [
+                {
+                    model: User,
+                    attributes: ['name'],
+                },
+            ],
+        });
+        const comments = commentData.map(comment => comment.get({ plain: true }));
+
+        res.render('comments', {
+            ...blog,
+            comments,
+            logged_in: true
+        });
+
+
+    } catch (err) {
+        res.status(500).json(err);
+    }
+
 });
 
 router.get('/logout', (req, res) => {
     if (req.session.logged_in) {
-        req.session.destroy(() => {
-            res.redirect('/');
-            res.status(204).end();
-        });
+        req.session.destroy();
+        res.redirect('/');
+        res.status(204).end();
     } else {
         res.status(404).end();
     }
